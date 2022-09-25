@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+class StackUsingArray {
+	string *data;
+	int nextIndex;
+	int capacity;	
+
+	public :
+
+	StackUsingArray() {
+		data = new string[4];
+		nextIndex = 0;
+		capacity = 4;
+	}
+
+	// return the number of elements present in my stack
+	int size() {
+		return nextIndex;
+	}
+
+	bool isEmpty() {
+		return nextIndex == 0;
+	}
+	// insert element
+	void push(string element) {
+		if(nextIndex == capacity) {
+			string *newData = new string[2 * capacity];
+			for(int i = 0; i < capacity; i++) {
+				newData[i] = data[i];
+			}
+			capacity *= 2;
+			delete [] data;
+			data = newData;
+		
+		}
+		data[nextIndex] = element;
+		nextIndex++;
+	}
+	// delete element
+	string pop() {
+		if(isEmpty()) {
+			cout << "Stack is empty " << endl;
+			return 0;	
+		}
+		nextIndex--;
+		return data[nextIndex];
+	}
+	string top() {
+		if(isEmpty()) {
+			cout << "Stack is empty " << endl;
+			return 0;	
+		}
+		return data[nextIndex - 1];
+	}
